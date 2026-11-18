@@ -1,52 +1,55 @@
-# JamstackTemplates Next.js starter
+# Fresh Stripes Mowing (`next-mowing-fresh`)
 
-The shared starter for Next.js templates in the `JamstackTemplates` organization. Its canonical home is
-`JamstackTemplates/template-next`, alongside the templates generated from it.
-It is not a gallery design or a published demo. Business content is sample content. No application code
-in a website created from this template depends on the starter checkout or the portal repository.
+Static Next.js website for **Fresh Stripes Mowing**, a fictitious residential lawn-mowing crew in
+Melbourne's inner east (sample template for the Jamstacks gallery). No application code depends on
+the starter or portal repository at runtime.
 
-## Build your website
+## Local preview
 
-Start in the checkout of the repository GitHub created from `JamstackTemplates/template-next`. All
-starter files are already present. Local development requires Node 24 or later and npm.
+Local development requires Node 24 or later and npm:
 
-To build a new site, fill in `plan/PLAN.md`, then tell the coding agent **`Implement plan/PLAN.md`**.
-In Claude Code, `/write-plan <business description>` drafts the brief for you. For a gallery template,
-pass the table row: `/write-plan next-type-style | Business | Description | Form purpose`.
-After reviewing the finished site, run `/cleanup-plan` or delete `plan/` and `.claude/skills/` by hand
-to remove all initial build instructions.
-
-To preview locally, run `npm ci` and `npm run dev` from the repository root.
+```sh
+npm ci
+npm run dev
+```
 
 ## Pages
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Minimal content-driven home page and Organization JSON-LD |
-| `/contact/` | Hosted support form when configured; visible email alternative |
-| `/404.html` | Friendly static error page |
+| `/` | Home page: hero with live phone-line status, visit inclusions, interactive stripe-pattern picker, mowing plans, lawn-size price teaser, round ribbon, 3-step start and `HomeAndConstructionBusiness` JSON-LD |
+| `/prices/` | Plans & prices: weekly/fortnightly spread with winter rhythm, progressive-enhanced lawn-size helper, groundskeeper's price chart, 4 stripe patterns, shed tool-rack add-ons and price notes |
+| `/suburbs/` | Suburbs: progressive-enhanced suburb/postcode lookup, schematic patchwork map, Monday–Saturday round sheet and waitlist enquiry band |
+| `/contact/` | Get a quote: message checklist, hosted Jamstacks support form when configured (or visible email fallback), email, phone and phone-line hours |
+| `/404.html` | Static error page with "Off the lawn" illustration and links to Home, Prices and Suburbs |
 
 ## Make it yours
 
 | File | Owns |
 | --- | --- |
-| `content/business.ts` | Shared business name, contact details and starter sample copy |
-| `app/page.tsx`, `app/<route>/page.tsx` | Page composition and editable copy such as headings and calls to action |
-| `content/menu.ts` or `content/services.ts` (add when needed) | Industry-specific typed collections |
-| `site.config.json` | Public name, description, hostname, optional timeZone and Jamstacks integration |
-| `app/tailwind.input.css` | Theme tokens, utility mappings and small shared styles |
-| `components/site-header.tsx`, `site-footer.tsx` | Replaceable navigation and visual shell |
-| `lib/structured-data.ts` | Schema type/properties derived from real content |
-| `app/sitemap.ts` | Public routes; update when adding a page |
+| `content/business.ts` | Business name, short name, tagline, introduction, public email, phone, 7-day `phoneHours`, service area, landmark (`Victoria Park, Kew`), region/country and Contact checklist tips |
+| `content/plans.ts` | `weekly` and `fortnightly` mowing plans (`id`, `name`, `frequency`, `summary`, `bestFor`, `includes`, `seasonNote`, `quietMonths`) |
+| `content/prices.ts` | Lawn-size bands (`id`, `label`, `minM2`, `maxM2`, `example`, `weekly`, `fortnightly`, `oneOff`) with contiguous range and price-order validation |
+| `content/patterns.ts` | Stripe patterns (`straight`, `diagonal`, `checkerboard`, `diamond`), surcharges and `minBandId` references to `prices.ts` |
+| `content/addons.ts` | Optional add-ons (`id`, `name`, `price`, `unit`, `icon`) shown on the Prices shed rack |
+| `content/suburbs.ts` | Suburbs served and waitlisted (`id`, `name`, `postcode`, `roundDay`, `status`), driving the Home round ribbon, Suburbs lookup, patchwork map, round sheet and JSON-LD `areaServed` |
+| `app/page.tsx`, `app/prices/page.tsx`, `app/suburbs/page.tsx`, `app/contact/page.tsx`, `app/not-found.tsx` | Page composition and editable headings, introductions, labels and calls to action |
+| `site.config.json` | Public `name`, `description`, `domain`, `timeZone` (`Australia/Melbourne`) and Jamstacks integration (`siteId`, `cdnUrl`) |
+| `app/tailwind.input.css` | Light ("Saturday morning") and dark ("Oval under floodlights") tokens, `@theme inline` mappings, lawn stripe textures, grass fringes, responsive price-table rules and print styles |
+| `components/site-header.tsx`, `components/site-footer.tsx`, `components/art/*` | Navigation shell and inline SVG artwork (`hero-yard`, `mower`, `marks`, `lawn-plot`, `plan-calendar`, `suburb-map`, `off-the-lawn`, `icons`) |
+| `lib/structured-data.ts`, `lib/lawn-size.ts`, `lib/suburb-lookup.ts`, `lib/phone-lines.ts` | Schema.org `HomeAndConstructionBusiness` JSON-LD, lawn-area band matching, suburb lookup normalisation and Melbourne phone-line hours |
+| `app/sitemap.ts`, `app/icon.svg`, `public/og.png` | Static sitemap, site icon and 1200×630 social preview image |
 
-Edit page copy in the route file, for example `<Hero.Heading>Seasonal flowers</Hero.Heading>`
-in `app/page.tsx` for the Home page. The backing
-component owns the styling and interactions. Use typed fields for data the site needs to look up or
-reuse. For example, change `business.email` to update Contact. Rename in `business.name` and
-`site.config.json.name`. Add a typed core-content file for frequent owner edits: a food menu should use
-the existing sections/items/price/availability model; changes such as sold out, seasonal or a new section
-should be data edits with actionable content tests. Do not add business content to configuration: the
-Jamstacks provisioner replaces that file wholesale, possibly adding `provisioningId`.
+Common owner edits:
+- **Change a price:** edit `content/prices.ts` (`weekly`, `fortnightly`, `oneOff`) and run `npm run check`.
+- **Move a suburb off the waitlist:** change `status: 'waitlist'` to `'served'` in `content/suburbs.ts` and rebuild; the Home round strip, Suburbs round sheet, patchwork map, lookup and JSON-LD `areaServed` all update automatically.
+- **Change phone hours:** edit `phoneHours` in `content/business.ts` (same-day intervals only, in `site.config.json`'s `timeZone`).
+
+Do not add business content to `site.config.json`: the Jamstacks provisioner replaces that file wholesale, possibly adding `provisioningId`.
+
+## Fonts and licences
+
+Self-hosted variable fonts installed via npm (`@fontsource-variable/unbounded`, `@fontsource-variable/onest`, `@fontsource-variable/martian-mono`), all SIL Open Font License (OFL).
 
 ## Appearance and optional local-business features
 

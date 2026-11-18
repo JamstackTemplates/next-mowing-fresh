@@ -1,0 +1,19 @@
+{
+  "name": "Fresh Stripes Mowing",
+  "description": "A fresh lawn-green theme for mowing and lawn-care businesses: mown-stripe artwork with a stripe-pattern picker, weekly and fortnightly mowing plans, a price-by-lawn-size table with a size helper, a suburbs-served lookup with mowing-round days, phone hours and a Jamstacks contact component for quote enquiries.",
+  "tech": "next",
+  "type": "mowing",
+  "style": "fresh",
+  "internal": false,
+  "components": [
+    "support-form"
+  ],
+  "configFile": "site.config.json",
+  "screenshots": {
+    "light": "jamstacks/home-light.jpg",
+    "dark": "jamstacks/home-dark.jpg",
+    "theme": {
+      "strategy": "media"
+    }
+  }
+}

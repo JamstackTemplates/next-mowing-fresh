@@ -1,0 +1,22 @@
+{
+  "templateId": "next-mowing-fresh",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fullPage": false,
+  "captures": [
+    {
+      "mode": "light",
+      "sha256": "8f56fd0c68292e4c71e576a15ae5d61baf36e52f33fe75a261de9a8655af35f4",
+      "file": "jamstacks/home-light.jpg",
+      "bytes": 293657
+    },
+    {
+      "mode": "dark",
+      "sha256": "293d53312723367e48f45ba304d41c85ed001c4a5b735763fd89747c993ad9ae",
+      "file": "jamstacks/home-dark.jpg",
+      "bytes": 234030
+    }
+  ]
+}

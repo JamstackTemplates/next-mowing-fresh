@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#2457a7"/><path d="M17 20h30v24H17zM24 14v36M40 14v36" fill="none" stroke="#fff" stroke-width="4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="icon-clip">
+      <rect width="64" height="64" rx="14"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#icon-clip)">
+    <rect width="64" height="64" fill="#4a9a35"/>
+    <rect x="0" y="0" width="22" height="64" fill="#6dbb4a"/>
+    <rect x="42" y="0" width="22" height="64" fill="#6dbb4a"/>
+  </g>
+  <rect width="64" height="64" rx="14" fill="none" stroke="#10261a" stroke-width="3"/>
+  <g transform="translate(19 10) scale(.26)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 80 L21 158 M74 80 L79 158" fill="none" stroke="#10261a" stroke-width="4.5"/>
+    <path d="M13 160 H87" fill="none" stroke="#10261a" stroke-width="8"/>
+    <path d="M33 160 H67" fill="none" stroke="#f2b705" stroke-width="4"/>
+    <g fill="#10261a">
+      <rect x="1" y="6" width="13" height="24" rx="4"/>
+      <rect x="86" y="6" width="13" height="24" rx="4"/>
+      <rect x="1" y="50" width="13" height="24" rx="4"/>
+      <rect x="86" y="50" width="13" height="24" rx="4"/>
+    </g>
+    <rect x="8" y="0" width="84" height="80" rx="20" fill="#f2b705" stroke="#10261a" stroke-width="3"/>
+    <path d="M10 58 Q50 70 90 58 L90 62 Q90 78 72 79 H28 Q10 78 10 62 Z" fill="#c99300"/>
+    <circle cx="50" cy="36" r="20" fill="#24382c" stroke="#10261a" stroke-width="3"/>
+    <circle cx="50" cy="36" r="5.5" fill="#f2b705" stroke="#10261a" stroke-width="2"/>
+  </g>
+</svg>

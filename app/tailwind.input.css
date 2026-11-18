@@ -1,65 +1,175 @@
+/*
+ * Fresh Stripes Mowing — "Fresh-cut oval: mown stripes and chalk lines".
+ * Tokens live here in three blocks (light, automatic dark, explicit dark) and are mapped to
+ * Tailwind utilities in @theme inline. Lawn textures, fringes, chalk rules and the stripe picker's
+ * no-JS behaviour are small shared rules at the bottom. Components use utilities for everything else.
+ */
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: #f7f8fa;
+  /* Saturday morning */
+  --bg: #f3f8ea;
   --surface: #ffffff;
-  --text: #172033;
-  --muted: #526078;
-  --accent: #2457a7;
-  --accent-ink: #2457a7;
+  --surface-soft: #e6f0d6;
+  --text: #10261a;
+  --muted: #4b6352;
+  --accent: #1f7a2e;
+  --accent-strong: #165c22;
+  --accent-ink: #1a6b28;
   --on-accent: #ffffff;
-  --line: #c7cfdb;
-  --focus: #2457a7;
+  --line: #b9cda6;
+  --focus: #0f4f1c;
+  --focus-halo: #ffffff;
+  --stripe-light: #6dbb4a;
+  --stripe-dark: #4a9a35;
+  --shaggy: #86a94c;
+  --tuft: #5f8a32;
+  --deep-a: #1f5e2b;
+  --deep-b: #195122;
+  --on-deep: #f3f8ea;
+  --on-deep-muted: #cfe3c4;
+  --chalk: #ffffff;
+  --mower: #f2b705;
+  --mower-shade: #c99300;
+  --soil: #8a5a33;
+  --soil-dark: #6b4426;
+  --path: #d9dccd;
+  --path-edge: #b9bdab;
+  --bag: #2f4f3a;
+  --art-ink: #10261a;
+  --house: #f7f3e6;
+  --house-line: #c9c2a8;
+  --roof: #5b6b63;
+  --sky-glow: rgb(242 183 5 / .16);
+  --pegboard: #c9a374;
+  --peg-hole: #94703f;
+  --shadow: rgb(16 38 26 / .14);
   --map-filter: none;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
  :root:not(.light) {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
+  /* Oval under floodlights */
+  --bg: #0b1710;
+  --surface: #12231a;
+  --surface-soft: #183025;
+  --text: #e6f2e1;
+  --muted: #a7bfa9;
+  --accent: #23863a;
+  --accent-strong: #2f9c48;
+  --accent-ink: #8fd99b;
   --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
+  --line: #2e4a36;
+  --focus: #f6d451;
+  --focus-halo: #0b1710;
+  --stripe-light: #2a5e33;
+  --stripe-dark: #1e4826;
+  --shaggy: #2b4524;
+  --tuft: #45692f;
+  --deep-a: #0f2a17;
+  --deep-b: #0c2213;
+  --on-deep: #e6f2e1;
+  --on-deep-muted: #a7bfa9;
+  --chalk: #ddebd6;
+  --mower: #f6d451;
+  --mower-shade: #c9a52c;
+  --soil: #b07a4c;
+  --soil-dark: #6e4a2c;
+  --path: #3a463d;
+  --path-edge: #2b352e;
+  --bag: #1c3324;
+  --art-ink: #07110b;
+  --house: #26332b;
+  --house-line: #3a4a40;
+  --roof: #18211c;
+  --sky-glow: rgb(246 212 81 / .14);
+  --pegboard: #4a3826;
+  --peg-hole: #2a1f15;
+  --shadow: rgb(0 0 0 / .4);
   --map-filter: grayscale(.4) brightness(.8);
   color-scheme: dark;
  }
 }
 :root.dark {
-  --bg: #141923;
-  --surface: #1e2633;
-  --text: #f1f5fa;
-  --muted: #b5c2d5;
-  --accent: #2457a7;
-  --accent-ink: #a9cbff;
+  --bg: #0b1710;
+  --surface: #12231a;
+  --surface-soft: #183025;
+  --text: #e6f2e1;
+  --muted: #a7bfa9;
+  --accent: #23863a;
+  --accent-strong: #2f9c48;
+  --accent-ink: #8fd99b;
   --on-accent: #ffffff;
-  --line: #61708a;
-  --focus: #a9cbff;
+  --line: #2e4a36;
+  --focus: #f6d451;
+  --focus-halo: #0b1710;
+  --stripe-light: #2a5e33;
+  --stripe-dark: #1e4826;
+  --shaggy: #2b4524;
+  --tuft: #45692f;
+  --deep-a: #0f2a17;
+  --deep-b: #0c2213;
+  --on-deep: #e6f2e1;
+  --on-deep-muted: #a7bfa9;
+  --chalk: #ddebd6;
+  --mower: #f6d451;
+  --mower-shade: #c9a52c;
+  --soil: #b07a4c;
+  --soil-dark: #6e4a2c;
+  --path: #3a463d;
+  --path-edge: #2b352e;
+  --bag: #1c3324;
+  --art-ink: #07110b;
+  --house: #26332b;
+  --house-line: #3a4a40;
+  --roof: #18211c;
+  --sky-glow: rgb(246 212 81 / .14);
+  --pegboard: #4a3826;
+  --peg-hole: #2a1f15;
+  --shadow: rgb(0 0 0 / .4);
   --map-filter: grayscale(.4) brightness(.8);
   color-scheme: dark;
 }
 
 @theme {
   --color-*: initial;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --radius-ui: .375rem;
+  --font-sans: 'Onest Variable', 'Onest', ui-sans-serif, sans-serif;
+  --font-display: 'Unbounded Variable', 'Unbounded', ui-sans-serif, sans-serif;
+  --font-mono: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace;
+  --radius-ui: .75rem;
 }
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
   --color-ink: var(--text);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-ink: var(--accent-ink);
   --color-on-accent: var(--on-accent);
   --color-line: var(--line);
+  --color-stripe-light: var(--stripe-light);
+  --color-stripe-dark: var(--stripe-dark);
+  --color-shaggy: var(--shaggy);
+  --color-deep: var(--deep-a);
+  --color-on-deep: var(--on-deep);
+  --color-on-deep-muted: var(--on-deep-muted);
+  --color-chalk: var(--chalk);
+  --color-mower: var(--mower);
+  --color-soil: var(--soil);
+  --color-pegboard: var(--pegboard);
 }
 :root {
-  --measure: 42rem;
+  --measure: 40rem;
+  /* Fine speckle grain, layered over lawn stripes only. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Serrated blade edge used as a mask for grass fringes. */
+  --blades: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='14' viewBox='0 0 36 14'%3E%3Cpath d='M0 14 L2 6 L4 14 L6 2 L8 14 L10 7 L12 14 L14 0 L16 14 L19 5 L21 14 L23 3 L25 14 L27 8 L29 14 L31 1 L33 14 L35 6 L36 14Z'/%3E%3C/svg%3E");
+  /* Tufts for unmown grass, used as a mask over --tuft. */
+  --tufts: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='40' viewBox='0 0 46 40'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 14 L4 7 M6 14 L7 5 M6 14 L10 8'/%3E%3Cpath d='M30 32 L27 25 M30 32 L31 23 M30 32 L34 26'/%3E%3Cpath d='M38 10 L36 4 M38 10 L41 5'/%3E%3Cpath d='M16 36 L14 30 M16 36 L19 31'/%3E%3C/g%3E%3C/svg%3E");
+  --stripe-w: 2.75rem;
   --jamstacks-font-family: var(--font-sans);
   --jamstacks-color-text: var(--text);
   --jamstacks-color-background: var(--surface);
@@ -68,7 +178,7 @@
   --jamstacks-color-muted: var(--muted);
   --jamstacks-color-link: var(--accent-ink);
   --jamstacks-border-radius: var(--radius-ui);
-  --jamstacks-control-height: 2.75rem;
+  --jamstacks-control-height: 2.9rem;
   --jamstacks-spacing: 1rem;
   --jamstacks-form-max-width: 40rem;
   --jamstacks-toggle-color: var(--text);
@@ -78,35 +188,162 @@
   --jamstacks-toggle-dark-background: var(--surface);
   --jamstacks-toggle-focus-color: var(--focus);
 }
+
 @layer base {
-  html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-padding-top: 1.5rem; }
-  body { margin: 0; line-height: 1.6; }
-  main { min-height: 65vh; }
-  a { text-underline-offset: .2em; }
-  a:hover { text-decoration: underline; }
-  button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-  [aria-current="page"] { text-decoration: underline; }
+  html { background: var(--bg); color: var(--text); font-family: var(--font-sans); scroll-padding-top: 1.5rem; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-size: 1.0625rem; line-height: 1.6; overflow-x: clip; }
+  main { min-height: 65vh; display: block; }
+  main:focus { outline: none; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.08; letter-spacing: .005em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: .08em; }
+  button { cursor: pointer; font: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 7px var(--focus-halo); border-radius: .35rem; }
+  ::selection { background: var(--mower); color: #10261a; }
 }
-@utility wrap { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+
+@utility wrap { width: min(100% - 2rem, 80rem); margin-inline: auto; }
+@utility font-figures { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
 @layer components {
-  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border: 1px solid var(--accent); border-radius: var(--radius-ui); background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
-  .button:hover { text-decoration: underline; }
-  .button-quiet { background: var(--surface); color: var(--accent-ink); border-color: var(--line); }
-  .text-link { color: var(--accent-ink); text-decoration: underline; }
-  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem; z-index: 200; background: var(--surface); }
+  .button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 3rem; padding: .7rem 1.45rem; border: 2px solid var(--accent); border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 650; text-decoration: none; transition: background-color .15s, transform .15s; }
+  .button:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-1px); }
+  .dark .button:hover { background: #1f7a33; border-color: #1f7a33; }
+  .button-quiet { background: var(--surface); color: var(--text); border-color: var(--line); }
+  .button-quiet:hover { background: var(--surface-soft); border-color: var(--accent); }
+  .text-link { color: var(--accent-ink); text-decoration: underline; font-weight: 600; }
+  .text-link:hover { text-decoration-thickness: .16em; }
+  .skip-link { position: absolute; left: 1rem; top: -8rem; padding: .75rem 1rem; z-index: 200; background: var(--surface); color: var(--text); border-radius: .5rem; font-weight: 700; }
   .skip-link:focus { top: 1rem; }
+  /* Chalk underline for nav links: a painted line that draws in on hover/focus. */
+  .chalk-link { position: relative; text-decoration: none; font-weight: 600; padding-block: .35rem; }
+  .chalk-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+  .chalk-link:hover::after, .chalk-link:focus-visible::after, .chalk-link[aria-current="page"]::after { transform: scaleX(1); }
 }
+
+/* ---------- Lawn textures (in the components layer so utilities such as `absolute` can override) ---------- */
+@layer components {
+.lawn { position: relative; isolation: isolate; background-color: var(--stripe-dark); }
+.lawn--straight { background-image: var(--grain), repeating-linear-gradient(90deg, var(--stripe-light) 0 var(--stripe-w), var(--stripe-dark) var(--stripe-w) calc(var(--stripe-w) * 2)); }
+.lawn--rows { background-image: var(--grain), repeating-linear-gradient(0deg, var(--stripe-light) 0 var(--stripe-w), var(--stripe-dark) var(--stripe-w) calc(var(--stripe-w) * 2)); }
+.lawn--diagonal { background-image: var(--grain), repeating-linear-gradient(135deg, var(--stripe-light) 0 var(--stripe-w), var(--stripe-dark) var(--stripe-w) calc(var(--stripe-w) * 2)); }
+.lawn--checkerboard { background-image: var(--grain),
+  repeating-linear-gradient(0deg, rgb(255 255 255 / .14) 0 var(--stripe-w), rgb(0 0 0 / .07) var(--stripe-w) calc(var(--stripe-w) * 2)),
+  repeating-linear-gradient(90deg, var(--stripe-light) 0 var(--stripe-w), var(--stripe-dark) var(--stripe-w) calc(var(--stripe-w) * 2)); }
+.lawn--diamond { background-image: var(--grain),
+  repeating-linear-gradient(45deg, rgb(255 255 255 / .14) 0 var(--stripe-w), rgb(0 0 0 / .07) var(--stripe-w) calc(var(--stripe-w) * 2)),
+  repeating-linear-gradient(-45deg, var(--stripe-light) 0 var(--stripe-w), var(--stripe-dark) var(--stripe-w) calc(var(--stripe-w) * 2)); }
+.lawn--deep { background-color: var(--deep-b); background-image: var(--grain), repeating-linear-gradient(90deg, var(--deep-a) 0 4.5rem, var(--deep-b) 4.5rem 9rem); color: var(--on-deep); }
+.shaggy { position: relative; isolation: isolate; background-color: var(--shaggy); background-image: var(--grain); }
+.shaggy::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--tuft); -webkit-mask: var(--tufts) 0 0 / 46px 40px; mask: var(--tufts) 0 0 / 46px 40px; }
+
+/* Grass-blade fringe on the top or bottom edge of a band. Set --fringe to the band's edge colour. */
+.fringe-top::before, .fringe-bottom::after { content: ''; position: absolute; left: 0; right: 0; height: 14px; z-index: 1; pointer-events: none;
+  background: var(--fringe, var(--stripe-dark)); -webkit-mask: var(--blades) repeat-x 0 100% / 36px 14px; mask: var(--blades) repeat-x 0 100% / 36px 14px; }
+.fringe-top::before { top: -13px; }
+.fringe-bottom::after { bottom: -13px; transform: scaleY(-1); }
+
+}
+
+/* ---------- Stripe picker: radios + :has() swap the mown layer with no JavaScript ---------- */
+.picker-layer { position: absolute; inset: 0; display: none; }
+.picker-layer[data-pattern="straight"] { display: block; }
+@supports selector(:has(*)) {
+  .picker-layer[data-pattern="straight"] { display: none; }
+  .stripe-picker:has(input[value="straight"]:checked) .picker-layer[data-pattern="straight"],
+  .stripe-picker:has(input[value="diagonal"]:checked) .picker-layer[data-pattern="diagonal"],
+  .stripe-picker:has(input[value="checkerboard"]:checked) .picker-layer[data-pattern="checkerboard"],
+  .stripe-picker:has(input[value="diamond"]:checked) .picker-layer[data-pattern="diamond"] { display: block; animation: mow-in 1.5s cubic-bezier(.5, .1, .3, 1) both; }
+  .stripe-picker [data-pattern-note] { display: none; }
+  .stripe-picker:has(input[value="straight"]:checked) [data-pattern-note="straight"],
+  .stripe-picker:has(input[value="diagonal"]:checked) [data-pattern-note="diagonal"],
+  .stripe-picker:has(input[value="checkerboard"]:checked) [data-pattern-note="checkerboard"],
+  .stripe-picker:has(input[value="diamond"]:checked) [data-pattern-note="diamond"] { display: block; }
+}
+.picker-layer .picker-mower { position: absolute; top: 50%; left: 100%; width: clamp(4.5rem, 9vw, 7rem); translate: -100% -50%; animation: mower-pass 1.5s cubic-bezier(.5, .1, .3, 1) both; }
+.picker-option:has(input:checked) { border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 2px var(--accent), 0 10px 24px -14px var(--shadow); }
+.picker-option:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+@keyframes mow-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes mower-pass { from { left: 0%; } to { left: 100%; } }
+
+/* Day/night art swaps follow the theme tokens. */
+.night-only { display: none; }
+:root.dark .night-only { display: inline; }
+:root.dark img.night-only { display: block; }
+:root.dark .day-only { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .night-only { display: inline; }
+  :root:not(.light) img.night-only { display: block; }
+  :root:not(.light) .day-only { display: none; }
+}
+
+/* Floodlight glow on heads in dark mode; a warm sun wash by day. */
+.glow { background-image: radial-gradient(60rem 22rem at 78% -6rem, var(--sky-glow), transparent 70%); }
+
+/* Lawn-size helper highlight & responsive groundskeeper's price chart. */
+.band-row[data-match="true"] { background: var(--surface); box-shadow: inset 6px 0 0 var(--mower), 0 0 0 2px var(--accent); }
+.price-chart-wrap { container-type: inline-size; }
+.tape-rule {
+  background-color: var(--mower);
+  background-image:
+    repeating-linear-gradient(to bottom, var(--art-ink) 0 2px, transparent 2px 12px),
+    repeating-linear-gradient(to bottom, var(--art-ink) 0 2px, transparent 2px 36px);
+  background-position: right 0 top 8px, right 0 top 8px;
+  background-size: 9px 12px, 16px 36px;
+  background-repeat: repeat-y;
+}
+.pegboard {
+  background-color: var(--pegboard);
+  background-image: radial-gradient(var(--peg-hole) 2.2px, transparent 2.4px);
+  background-size: 22px 22px;
+}
+@container (width < 620px) {
+  .price-table, .price-table thead, .price-table tbody, .price-table tr, .price-table th, .price-table td { display: block; }
+  .price-table thead { display: none; }
+  .price-table tbody tr {
+    padding: 1rem 1rem 1.1rem;
+    border-bottom: 2px solid var(--line);
+  }
+  .price-table tbody tr:last-child { border-bottom: 0; }
+  .price-table tbody th { padding: 0 0 .85rem; text-align: left; }
+  .price-table tbody td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .42rem 0;
+    border-top: 1px dashed var(--line);
+    text-align: right;
+  }
+  .price-table tbody td[data-col="weekly"]::before { content: var(--col-weekly, "Weekly") ": "; font-family: var(--font-sans); font-size: .92rem; font-weight: 600; color: var(--muted); }
+  .price-table tbody td[data-col="fortnightly"]::before { content: var(--col-fortnightly, "Fortnightly") ": "; font-family: var(--font-sans); font-size: .92rem; font-weight: 600; color: var(--muted); }
+  .price-table tbody td[data-col="oneoff"]::before { content: var(--col-oneoff, "One-off") ": "; font-family: var(--font-sans); font-size: .92rem; font-weight: 600; color: var(--muted); }
+}
+
+/* Suburb map highlight. */
+.map-plot { transition: opacity .2s; }
+.suburb-map[data-active] .map-plot { opacity: .45; }
+.suburb-map[data-active] .map-plot[data-on="true"] { opacity: 1; }
+.map-plot[data-on="true"] .map-outline { stroke: var(--mower); stroke-width: 6; }
+
+/* Hosted form host. */
 .map iframe { width: 100%; min-height: 20rem; border: 0; filter: var(--map-filter); }
 .enquiry__host { display: block; }
 .enquiry__status { margin-top: 1rem; color: var(--muted); }
 .enquiry[data-state="present"] > .enquiry__status { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
 @media print {
-  nav, .skip-link, .enquiry, button { display: none !important; }
-  html { background: white; color: black; }
-  a { color: inherit; }
+  nav, .skip-link, .enquiry, button, .no-print, [data-art], .fringe-top::before, .fringe-bottom::after { display: none !important; }
+  html, body { background: white !important; color: black !important; }
+  .lawn, .lawn--deep, .shaggy, .glow { background: none !important; color: black !important; }
+  .shaggy::before { display: none !important; }
+  * { color: black !important; box-shadow: none !important; text-shadow: none !important; }
+  a { color: inherit; text-decoration: underline; }
+  a[href^="mailto:"]::after, a[href^="tel:"]::after { content: ''; }
+  section, table, li { break-inside: avoid; }
 }
